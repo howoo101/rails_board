@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get 'home/new'
-  post 'home/create'
+  post 'home/create',as: 'posts'
   get 'home/destroy/:post_id', to: 'home#destroy' ,as: 'post_destroy'
   get 'home/edit/:post_id', to:'home#edit'
-  post 'home/update/:post_id', to:'home#update'
+  patch 'home/update/:post_id', to:'home#update', as:'post'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

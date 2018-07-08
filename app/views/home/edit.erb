@@ -9,4 +9,23 @@
     
 </form>
 
+<!--form helper-->
+<!--form_tag-->
+<%= form_tag(post_path, method:"patch") do%>
+    <%=label_tag 'post_title','제목' %>
+    <%=text_field_tag('post_title',@post.title) %><br>
+    <%=label_tag 'post_content','내용' %>
+    <%=text_area_tag('post_content',@post.text)%><br>
+    <%=submit_tag '작성'%>
+<%end%>
+
+<!--form_for-->
+<%=form_for(@post, url: post_path, method: 'patch')  do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br>
+    
+    <%=f.label :text, '내용'%>
+    <%=f.text_area :text%><br>
+    <%=f.submit '작성'%>
+<%end%>
 <a href="/">뒤로가기</a>
