@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  before_action :set_post, only: 
+  [:edit, :update, :destroy] 
+  
   def index
   @posts = Post.all
   end
@@ -8,30 +11,45 @@ class HomeController < ApplicationController
   end
   
   def create
-    post = Post.new
-    post.title = params[:post][:title]
-    post.text = params[:post][:text]
-    post.save
+    post = Post.new(post_params)
+    respond_to do |format|
+      if post.save
+        format.html{ redirect_to posts_path, notice: '성공'}
+      else
+        format.html{ render :new }
+      end
+    end
     
-    redirect_to '/home/index'
   end
   
   def destroy
-    post = Post.find(params[:post_id])
-    post.destroy
-    redirect_to '/'
+    @post.destroy
+    redirect_to posts_path
   end
   
   def edit
-    @post = Post.find(params[:post_id])
   end
   
   def update
-    post = Post.find(params[:post_id])
-    post.title = params[:post][:title]
-    post.text = params[:post][:text]
-    post.save
-    
-    redirect_to '/'
+    respond_to do |format|
+        if @post.update(post_params)
+          format.html {redirect_to posts_path, notice:
+          '성공'}
+        else 
+          format.html{render :edit}
+        end
+    end
   end
+  
+  private 
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  
+  def post_params
+    params.require(:post).permit(:title, :text)
+  end
+  
+  
+  
 end

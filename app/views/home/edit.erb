@@ -11,6 +11,7 @@
 
 <!--form helper-->
 <!--form_tag-->
+formtag
 <%= form_tag(post_path, method:"patch") do%>
     <%=label_tag 'post_title','제목' %>
     <%=text_field_tag('post_title',@post.title) %><br>
@@ -19,8 +20,9 @@
     <%=submit_tag '작성'%>
 <%end%>
 
+formfor
 <!--form_for-->
-<%=form_for(@post, url: post_path, method: 'patch')  do |f| %>
+<%=form_for(@post)  do |f| %>
     <%=f.label :title, '제목'%>
     <%=f.text_field :title%><br>
     
@@ -28,4 +30,6 @@
     <%=f.text_area :text%><br>
     <%=f.submit '작성'%>
 <%end%>
+render
+<%= render 'form'%>
 <a href="/">뒤로가기</a>

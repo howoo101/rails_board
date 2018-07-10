@@ -19,7 +19,7 @@
 <%end%>
 
 <!--form_for-->
-<%=form_for(@post, url:posts_path, method: 'post')  do |f| %>
+<%=form_for(@post)  do |f| %>
     <%=f.label :title, '제목'%>
     <%=f.text_field :title%> <br>
     
@@ -27,3 +27,5 @@
     <%=f.text_area :text%> <br>
     <%=f.submit '작성'%>
 <%end%>
+
+<%= render 'form' %>

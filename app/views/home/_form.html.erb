@@ -1,0 +1,8 @@
+<%=form_for(@post)  do |f| %>
+    <%=f.label :title, '제목'%>
+    <%=f.text_field :title%><br>
+    
+    <%=f.label :text, '내용'%>
+    <%=f.text_area :text%><br>
+    <%=f.submit '작성'%>
+<%end%>
