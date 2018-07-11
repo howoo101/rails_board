@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   root 'home#index'
   
+  devise_for :users
+  
   resources :posts,  controller: "home"
   # get 'home/index'
   # get 'home/new'

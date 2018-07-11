@@ -3,7 +3,9 @@
 <%=link_to '새글쓰기', new_post_path%><br>
 <% @posts.each do |post| %>
     제목: <%= post.title%><br>
-    내용: <%= post.text%><br>
+    <%=link_to post_path(post.id) do%>
+        <button>보기</button><br>
+    <%end%>
     <%=link_to post_path(post.id), method: :delete do%>    
         <button>삭제</button><br>
     <%end%>

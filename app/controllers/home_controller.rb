@@ -1,11 +1,14 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, only: 
+  [:show, :destory, :edit]
   before_action :set_post, only: 
-  [:edit, :update, :destroy] 
+  [:show, :edit, :update, :destroy] 
   
   def index
   @posts = Post.all
   end
-
+  def show
+  end
   def new
     @post = Post.new
   end
