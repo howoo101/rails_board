@@ -1,2 +1,28 @@
 제목:<%=@post.title%><br>
 내용:<%=@post.text%><br>
+------------------------<br> 
+<%=link_to :'뒤로가기', '/' %><br><br>
+
+<%= form_for Comment.new, url: post_comments_path(@post.id)  do |f|%>
+    <%= f.label :content, '댓글내용'%>
+    <%= f.text_field :content%><br>
+    <%= f.submit '댓글 작성'%>
+<%end%>
+
+
+<p>
+    <strong>Hashtags: </strong>
+    <%@post.hashtags.each do |h| %>
+        <%=h.title%>
+    <%end%>
+</p>
+<br><br>
+
+<%@post.comments.each do |comment| %>
+    <%=comment.content%> 
+    
+    <%if comment.user_id == current_user.id%>
+        <%= link_to '[삭제]', 
+        post_comment_path(@post.id,comment.id), method: :delete%>
+    <%end%><br>
+<%end%>

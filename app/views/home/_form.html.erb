@@ -4,5 +4,14 @@
     
     <%=f.label :text, '내용'%>
     <%=f.text_area :text%><br>
+    
+    <ul>
+        <%=f.fields_for :hashtags do |h| %>
+            <li>
+                <%= h.label :title,'헤시태크' %>
+                <%= h.text_field :title %>
+            </li>
+        <%end%>
+    </ul>
     <%=f.submit '작성'%>
 <%end%>

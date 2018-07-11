@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   
+  
+
   root 'home#index'
   
   devise_for :users
   
-  resources :posts,  controller: "home"
+  resources :posts,  controller: "home" do
+    resources :comments, only: [:create, :destroy]
+  end
   # get 'home/index'
   # get 'home/new'
   # post 'home/create',as: 'posts'

@@ -11,12 +11,19 @@ class HomeController < ApplicationController
   end
   def new
     @post = Post.new
+    3.times {@post.hashtags.new}
   end
   
   def create
-    post = Post.new(post_params)
+    @post = Post.new(post_params)
+    
+    3.times do |x|
+      tag = hashtag_params[:hashtags_attributes]["#{x}"]["title"]
+      hashtag = Hashtag.find_or_create_by(title: tag)
+      @post.hashtags << hashtag
+    end
     respond_to do |format|
-      if post.save
+      if @post.save
         format.html{ redirect_to posts_path, notice: '성공'}
       else
         format.html{ render :new }
@@ -53,6 +60,8 @@ class HomeController < ApplicationController
     params.require(:post).permit(:title, :text)
   end
   
-  
+  def hashtag_params
+    params.require(:post).permit(hashtags_attributes: [:title])
+  end
   
 end
